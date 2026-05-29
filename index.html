@@ -4,54 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>餐补存入助手</title>
-<style>
-    /* 页面基础设置 */
-    body { 
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-        text-align: center; 
-        padding: 40px 20px; 
-        background-color: #FDFBF7; /* 温暖奶油底色 */
-        color: #5D534A; /* 柔和的文字色 */
-    }
-    
-    /* 按钮样式优化 */
-    button { 
-        width: 100%; 
-        padding: 18px; 
-        margin: 12px 0; 
-        border-radius: 16px; /* 更大的圆角，更友好 */
-        border: none; 
-        background-color: #E6A57E; /* 暖陶土色 */
-        color: white; 
-        font-size: 18px; 
-        font-weight: 500;
-        box-shadow: 0 4px 6px rgba(230, 165, 126, 0.2); /* 轻微阴影，增加质感 */
-        transition: transform 0.1s, background-color 0.2s;
-    }
-    
-    /* 点击效果 */
-    button:active { 
-        transform: scale(0.98); 
-        background-color: #D48F66; 
-    }
-    
-    .hidden { display: none; }
-    h2 { font-weight: 600; margin-bottom: 25px; }
-</style>
+    <style>
+        /* 页面整体：奶油底色，舒适柔和 */
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            text-align: center; 
+            padding: 40px 20px; 
+            background-color: #FDFBF7; 
+            color: #5D534A; 
+        }
+
+        h2 { font-weight: 600; margin-bottom: 30px; }
+
+        /* 按钮基础样式：统一圆角和间距 */
+        button { 
+            width: 100%; 
+            padding: 18px; 
+            margin: 12px 0; 
+            border-radius: 16px; 
+            border: none; 
+            color: white; 
+            font-size: 18px; 
+            font-weight: 500;
+            transition: transform 0.1s, opacity 0.2s;
+            cursor: pointer;
+        }
+
+        /* 按钮按下反馈 */
+        button:active { transform: scale(0.97); opacity: 0.9; }
+
+        /* 温暖色系：核心存钱按钮 */
+        .btn-primary { background-color: #E6A57E; }
+        
+        /* 辅助色系：吃饭按钮（更柔和的浅陶色） */
+        .btn-secondary { background-color: #D9C5B2; }
+        
+        /* 警告/操作色系：去存钱按钮（更有活力的橘色） */
+        .btn-accent { background-color: #F4A460; }
+
+        .hidden { display: none; }
+    </style>
 </head>
 <body>
     <div id="step1">
         <h2>今天晚上吃晚饭吗？</h2>
-        <button onclick="alert('好的，吃得开心哦')">吃饭（不存钱）</button>
-        <button onclick="document.getElementById('step1').style.display='none'; document.getElementById('step2').style.display='block';" style="background: #FFDEAD;">不吃了，去存钱</button>
+        <button class="btn-secondary" onclick="alert('好的，吃得开心！')">吃饭，不存钱</button>
+        <button class="btn-accent" onclick="document.getElementById('step1').style.display='none'; document.getElementById('step2').style.display='block';">不吃了，去存钱</button>
     </div>
+
     <div id="step2" class="hidden">
         <h2>请选择店铺</h2>
-        <button style="background: #C1FFC1;" onclick="window.location.href='https://ur.alipay.com/_4lB26cCf4e5rbQAjIGjGOp'">蜀里</button>
-        <button style="background: #B0E2FF;" onclick="window.location.href='https://ur.alipay.com/_68fUKlMK9EyQjLYEq7LCNt'">马六七</button>
-        <button style="background: #FFEC8B;" onclick="window.location.href='https://ur.alipay.com/_4lB26cCf4e5rbQAjIGjGOp'">杨国福</button>
+        <button class="btn-primary" onclick="window.location.href='https://ur.alipay.com/_4lB26cCf4e5rbQAjIGjGOp'">蜀里</button>
+        <button class="btn-primary" onclick="window.location.href='https://ur.alipay.com/_68fUKlMK9EyQjLYEq7LCNt'">马六七</button>
+        <button class="btn-primary" onclick="window.location.href='https://ur.alipay.com/_4lB26cCf4e5rbQAjIGjGOp'">杨国福</button>
     </div>
-⁠<h1 style="font-size: 40px;">🍲</h1>⁠
-    
 </body>
 </html>
