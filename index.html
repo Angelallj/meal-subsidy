@@ -4,22 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>餐补存入助手</title>
-    <style>
-        body { font-family: -apple-system, sans-serif; text-align: center; padding: 20px; }
-        button { width: 100%; padding: 15px; margin: 10px 0; border-radius: 12px; border: none; background: #1677ff; color: white; font-size: 18px; font-weight: bold; }
-        .hidden { display: none; }
-    </style>
+<style>
+    /* 页面基础设置 */
+    body { 
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+        text-align: center; 
+        padding: 40px 20px; 
+        background-color: #FDFBF7; /* 温暖奶油底色 */
+        color: #5D534A; /* 柔和的文字色 */
+    }
+    
+    /* 按钮样式优化 */
+    button { 
+        width: 100%; 
+        padding: 18px; 
+        margin: 12px 0; 
+        border-radius: 16px; /* 更大的圆角，更友好 */
+        border: none; 
+        background-color: #E6A57E; /* 暖陶土色 */
+        color: white; 
+        font-size: 18px; 
+        font-weight: 500;
+        box-shadow: 0 4px 6px rgba(230, 165, 126, 0.2); /* 轻微阴影，增加质感 */
+        transition: transform 0.1s, background-color 0.2s;
+    }
+    
+    /* 点击效果 */
+    button:active { 
+        transform: scale(0.98); 
+        background-color: #D48F66; 
+    }
+    
+    .hidden { display: none; }
+    h2 { font-weight: 600; margin-bottom: 25px; }
+</style>
 </head>
 <body>
     <div id="step1">
         <h2>今天晚上吃晚饭吗？</h2>
-        <button onclick="alert('好的，记住了！')">吃饭（不存钱）</button>
+        <button onclick="alert('好的，吃得开心哦')">吃饭（不存钱）</button>
         <button onclick="document.getElementById('step1').style.display='none'; document.getElementById('step2').style.display='block';" style="background: #ff4d4f;">不吃了，去存钱</button>
     </div>
     <div id="step2" class="hidden">
         <h2>请选择店铺</h2>
         <button style="background: #52c41a;" onclick="window.location.href='https://ur.alipay.com/_4lB26cCf4e5rbQAjIGjGOp'">蜀里</button>
         <button style="background: #1890ff;" onclick="window.location.href='https://ur.alipay.com/_68fUKlMK9EyQjLYEq7LCNt'">马六七</button>
+        <button style="background: #faad14;" onclick="window.location.href='https://ur.alipay.com/_4lB26cCf4e5rbQAjIGjGOp'">杨国福</button>
     </div>
+⁠<h1 style="font-size: 40px;">🍲</h1>⁠
+    
 </body>
 </html>
