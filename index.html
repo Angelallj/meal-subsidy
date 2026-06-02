@@ -12,15 +12,14 @@
             padding: 40px 20px; 
             background-color: #FDFBF7; 
             color: #5D534A; 
+            margin: 0;
         }
 
         h2 { font-weight: 600; margin-bottom: 30px; }
 
         /* 按钮基础样式：统一圆角和间距 */
         button { 
-            width: 100%; 
             padding: 18px; 
-            margin: 12px 0; 
             border-radius: 16px; 
             border: none; 
             color: white; 
@@ -42,21 +41,128 @@
         /* 警告/操作色系：去存钱按钮（更有活力的橘色） */
         .btn-accent { background-color: #F4A460; }
 
-        .hidden { display: none; }
+        .hidden { display: none !important; }
+
+        /* ====== 新增：店铺行布局（两按钮并排） ====== */
+        .shop-row {
+            display: flex;
+            gap: 10px;
+            margin: 12px 0;
+            align-items: stretch;
+        }
+
+        .shop-row .btn-primary {
+            flex: 1;
+            margin: 0;
+        }
+
+        .shop-row .btn-qr {
+            width: 90px;
+            margin: 0;
+            padding: 18px 8px;
+            background-color: #C8B8A8;
+            color: white;
+            font-size: 14px;
+            border-radius: 16px;
+        }
+
+        /* ====== 新增：二维码弹窗 ====== */
+        .qr-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .qr-content {
+            background-color: #FDFBF7;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            max-width: 320px;
+            width: 100%;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .qr-content h3 {
+            margin: 0 0 20px 0;
+            color: #5D534A;
+            font-weight: 600;
+        }
+
+        .qr-content img {
+            width: 250px;
+            height: 250px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .qr-content .btn-secondary {
+            width: 100%;
+            margin: 0;
+        }
     </style>
 </head>
 <body>
+    <!-- 第一步 -->
     <div id="step1">
         <h2>今天晚上吃晚饭吗？</h2>
-        <button class="btn-secondary" onclick="alert('好的，吃得开心！')">吃饭，不存钱</button>
-        <button class="btn-accent" onclick="document.getElementById('step1').style.display='none'; document.getElementById('step2').style.display='block';">不吃了，去存钱</button>
+        <button class="btn-secondary" style="width: 100%; margin: 12px 0;" onclick="alert('好的，吃得开心！')">吃饭，不存钱</button>
+        <button class="btn-accent" style="width: 100%; margin: 12px 0;" onclick="document.getElementById('step1').style.display='none'; document.getElementById('step2').style.display='block';">不吃了，去存钱</button>
     </div>
 
+    <!-- 第二步 -->
     <div id="step2" class="hidden">
         <h2>请选择店铺</h2>
-        <button class="btn-primary" onclick="window.location.href='https://ur.alipay.com/_4lB26cCf4e5rbQAjIGjGOp'">蜀里</button>
-        <button class="btn-primary" onclick="window.location.href='https://ur.alipay.com/_68fUKlMK9EyQjLYEq7LCNt'">马六七</button>
-        <button class="btn-primary" onclick="window.location.href='https://ur.alipay.com/_4lB26cCf4e5rbQAjIGjGOp'">杨国福</button>
+        
+        <!-- 蜀里 -->
+        <div class="shop-row">
+            <button class="btn-primary" onclick="window.location.href='https://ur.alipay.com/_4lB26cCf4e5rbQAjIGjGOp'">蜀里</button>
+            <button class="btn-qr" onclick="showQRCode('蜀里', 'https://ur.alipay.com/_4lB26cCf4e5rbQAjIGjGOp')">二维码</button>
+        </div>
+        
+        <!-- 马六七 -->
+        <div class="shop-row">
+            <button class="btn-primary" onclick="window.location.href='https://ur.alipay.com/_68fUKlMK9EyQjLYEq7LCNt'">马六七</button>
+            <button class="btn-qr" onclick="showQRCode('马六七', 'https://ur.alipay.com/_68fUKlMK9EyQjLYEq7LCNt')">二维码</button>
+        </div>
+        
+        <!-- 杨国福 -->
+        <div class="shop-row">
+            <button class="btn-primary" onclick="window.location.href='https://ur.alipay.com/_4lB26cCf4e5rbQAjIGjGOp'">杨国福</button>
+            <button class="btn-qr" onclick="showQRCode('杨国福', 'https://ur.alipay.com/_4lB26cCf4e5rbQAjIGjGOp')">二维码</button>
+        </div>
     </div>
+
+    <!-- 二维码弹窗 -->
+    <div id="qrModal" class="qr-modal hidden" onclick="closeQRCode()">
+        <div class="qr-content" onclick="event.stopPropagation()">
+            <h3 id="qrTitle">店铺二维码</h3>
+            <img id="qrImg" src="" alt="二维码">
+            <button class="btn-secondary" onclick="closeQRCode()">关闭</button>
+        </div>
+    </div>
+
+    <script>
+        function showQRCode(shopName, url) {
+            var qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=' + encodeURIComponent(url);
+            document.getElementById('qrImg').src = qrUrl;
+            document.getElementById('qrTitle').textContent = shopName + ' - 扫码存钱';
+            document.getElementById('qrModal').classList.remove('hidden');
+        }
+
+        function closeQRCode() {
+            document.getElementById('qrModal').classList.add('hidden');
+            document.getElementById('qrImg').src = '';
+        }
+    </script>
 </body>
 </html>
