@@ -116,7 +116,7 @@
     <div id="step1">
         <h2>今天晚上吃晚饭吗？</h2>
         <button class="btn-secondary" style="width: 100%; margin: 12px 0;" onclick="alert('好的，吃得开心！')">吃饭，不存钱</button>
-        <button class="btn-accent" style="width: 100%; margin: 12px 0;" onclick="document.getElementById('step1').style.display='none'; document.getElementById('step2').style.display='block';">不吃了，去存钱</button>
+        <button class="btn-accent" style="width: 100%; margin: 12px 0;" onclick="document.getElementById('step1').classList.add('hidden'); document.getElementById('step2').classList.remove('hidden');">不吃了，去存钱</button>
     </div>
 
     <!-- 第二步 -->
