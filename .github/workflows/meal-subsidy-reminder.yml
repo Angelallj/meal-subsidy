@@ -3,7 +3,7 @@ name: 存餐补每日提醒
 on:
   schedule:
     # 北京时间 17:58，工作日（UTC 09:58，周一到周五）
-    - cron: '58 9 * * 1-5'
+    - cron: '30 9 * * 1-5'
   workflow_dispatch:
 
 jobs:
